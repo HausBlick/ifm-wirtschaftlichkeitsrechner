@@ -1,1 +1,1 @@
-# ifm-wirtschaftlichkeitsrechner
+### nur für Schulungszwecke
