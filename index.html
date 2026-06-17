@@ -10,6 +10,7 @@
     --red: #AD0131;
     --yellow: #FABB17;
     --green: #1BA56E;
+    --green-dark: #168558;
     --light: #E1EAF5;
     --gray: #8293A7;
     --bg: #F5F7FB;
@@ -66,7 +67,6 @@
     header { padding: 1rem; }
     header h1 { font-size: 1.3rem; }
   }
-
 
   .panel {
     background: var(--white);
@@ -224,13 +224,19 @@
   }
 
   .actions {
-    margin-top: 1rem;
-    text-align: right;
+    margin-top: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .actions-row {
+    display: flex;
+    gap: 0.6rem;
+    justify-content: flex-end;
   }
 
   button {
-    background: var(--navy);
-    color: white;
     border: none;
     padding: 0.6rem 1.2rem;
     border-radius: 5px;
@@ -241,7 +247,16 @@
     transition: background 0.15s;
   }
 
-  button:hover { background: #1d3148; }
+  button.primary {
+    background: var(--green);
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 0.9rem 1.2rem;
+    width: 100%;
+  }
+
+  button.primary:hover { background: var(--green-dark); }
 
   button.secondary {
     background: var(--white);
@@ -251,8 +266,15 @@
 
   button.secondary:hover { background: var(--light); }
 
+  button.tertiary {
+    background: var(--navy);
+    color: white;
+  }
+
+  button.tertiary:hover { background: #1d3148; }
+
   footer {
-    max-width: 1400px;
+    max-width: 1600px;
     margin: 1rem auto 2rem;
     padding: 0 2rem;
     font-size: 0.78rem;
@@ -288,25 +310,9 @@
     <h2>Eingaben</h2>
 
     <div class="group">
-      <div class="group-title">Objekt</div>
-      <div class="field">
-        <label>Wohnungen <span class="unit">Anzahl</span></label>
-        <input type="number" id="wohnungen" placeholder="0" min="0" step="1">
-      </div>
-      <div class="field">
-        <label>Wohnfläche je Wohnung <span class="unit">m²</span></label>
-        <input type="number" id="qm_je_we" placeholder="0" min="0" step="1">
-      </div>
-      <div class="field">
-        <label>Stellplätze <span class="unit">Anzahl</span></label>
-        <input type="number" id="stellplaetze" placeholder="0" min="0" step="1">
-      </div>
-    </div>
-
-    <div class="group">
       <div class="group-title">Erwerb</div>
       <div class="field">
-        <label>Kaufpreis <span class="unit">€</span></label>
+        <label>Kaufpreis <span class="unit">in Euro</span></label>
         <input type="number" id="kaufpreis" placeholder="0" min="0" step="10000">
       </div>
       <div class="field">
@@ -322,7 +328,7 @@
     <div class="group">
       <div class="group-title">Finanzierung</div>
       <div class="field">
-        <label>Eigenkapital <span class="unit">€</span></label>
+        <label>Eigenkapital <span class="unit">in Euro</span></label>
         <input type="number" id="eigenkapital" placeholder="0" min="0" step="10000">
       </div>
       <div class="field">
@@ -336,33 +342,33 @@
     </div>
 
     <div class="group">
-      <div class="group-title">Erträge</div>
+      <div class="group-title">Erträge (Jahresgesamtwerte)</div>
       <div class="field">
-        <label>Nettokaltmiete <span class="unit">€/m²/Monat</span></label>
-        <input type="number" id="miete_qm_monat" placeholder="0" min="0" step="0.1">
+        <label>Nettokaltmiete <span class="unit">Euro pro Jahr</span></label>
+        <input type="number" id="miete_jahr" placeholder="0" min="0" step="100">
       </div>
       <div class="field">
-        <label>Stellplatzmiete <span class="unit">€/Monat</span></label>
-        <input type="number" id="miete_stp_monat" placeholder="0" min="0" step="1">
+        <label>Stellplatzmieten <span class="unit">Euro pro Jahr</span></label>
+        <input type="number" id="stp_jahr" placeholder="0" min="0" step="100">
       </div>
     </div>
 
     <div class="group">
-      <div class="group-title">Bewirtschaftungskosten (nicht umlagefähig)</div>
+      <div class="group-title">Bewirtschaftungskosten (Jahresgesamtwerte, nicht umlagefähig)</div>
       <div class="field">
-        <label>Verwaltungskosten <span class="unit">€/Wohnung/Monat</span></label>
-        <input type="number" id="verwaltung" placeholder="0" min="0" step="1">
+        <label>Verwaltungskosten <span class="unit">Euro pro Jahr</span></label>
+        <input type="number" id="verwaltung_jahr" placeholder="0" min="0" step="100">
       </div>
       <div class="field">
-        <label>Erhaltungsrückstellung <span class="unit">€/m²/Jahr</span></label>
-        <input type="number" id="erhaltung" placeholder="0" min="0" step="0.5">
+        <label>Erhaltungsrückstellung <span class="unit">Euro pro Jahr</span></label>
+        <input type="number" id="erhaltung_jahr" placeholder="0" min="0" step="100">
       </div>
       <div class="field">
         <label>Mietausfallwagnis <span class="unit">% der Jahresnettomiete</span></label>
         <input type="number" id="wagnis_proz" placeholder="0" min="0" step="0.5">
       </div>
       <div class="field">
-        <label>Versicherungen + Sonstiges <span class="unit">€/Jahr</span></label>
+        <label>Versicherungen und Sonstiges <span class="unit">Euro pro Jahr</span></label>
         <input type="number" id="sonstiges" placeholder="0" min="0" step="50">
       </div>
     </div>
@@ -380,8 +386,11 @@
     </div>
 
     <div class="actions">
-      <button class="secondary" type="button" onclick="clearAll()">Eingaben leeren</button>
-      <button type="button" onclick="window.print()">Drucken</button>
+      <button class="primary" type="button" onclick="calc()">Berechnen</button>
+      <div class="actions-row">
+        <button class="secondary" type="button" onclick="clearAll()">Eingaben leeren</button>
+        <button class="tertiary" type="button" onclick="window.print()">Drucken</button>
+      </div>
     </div>
   </div>
 
@@ -400,7 +409,7 @@
       <tr><td>Verwaltungskosten</td><td class="value" id="o_verwaltung">0 €</td></tr>
       <tr><td>Erhaltungsrückstellung</td><td class="value" id="o_erhaltung">0 €</td></tr>
       <tr><td>Mietausfallwagnis</td><td class="value" id="o_wagnis">0 €</td></tr>
-      <tr><td>Versicherungen + Sonstiges</td><td class="value" id="o_sonstiges">0 €</td></tr>
+      <tr><td>Versicherungen und Sonstiges</td><td class="value" id="o_sonstiges">0 €</td></tr>
       <tr class="sum"><td>Summe Aufwendungen</td><td class="value" id="o_aufwand">0 €</td></tr>
 
       <tr class="section"><td colspan="2">Ergebnis</td></tr>
@@ -472,27 +481,21 @@
   };
 
   function calc() {
-    const wohnungen = val("wohnungen");
-    const qmJeWE = val("qm_je_we");
-    const stellplaetze = val("stellplaetze");
     const kaufpreis = val("kaufpreis");
     const knkProz = val("kaufnebenkosten_proz");
     const gebProz = val("gebaeudeanteil_proz");
     const eigenkapital = val("eigenkapital");
     const zinssatz = val("zinssatz");
     const tilgungProz = val("tilgung_proz");
-    const mieteQmMonat = val("miete_qm_monat");
-    const mieteStpMonat = val("miete_stp_monat");
-    const verwaltung = val("verwaltung");
-    const erhaltung = val("erhaltung");
+    const jahresMiete = val("miete_jahr");
+    const jahresStp = val("stp_jahr");
+    const verwaltungJahr = val("verwaltung_jahr");
+    const erhaltungJahr = val("erhaltung_jahr");
     const wagnisProz = val("wagnis_proz");
     const sonstiges = val("sonstiges");
     const afaProz = val("afa_proz");
     const steuersatz = val("steuersatz");
 
-    const gesamtQm = wohnungen * qmJeWE;
-    const jahresMiete = gesamtQm * mieteQmMonat * 12;
-    const jahresStp = stellplaetze * mieteStpMonat * 12;
     const summeErtraege = jahresMiete + jahresStp;
 
     const knk = kaufpreis * knkProz / 100;
@@ -502,8 +505,6 @@
 
     const zinsen = fremdkapital * zinssatz / 100;
     const tilgung = fremdkapital * tilgungProz / 100;
-    const verwaltungJahr = wohnungen * verwaltung * 12;
-    const erhaltungJahr = gesamtQm * erhaltung;
     const wagnisJahr = jahresMiete * wagnisProz / 100;
     const summeAufwand = zinsen + tilgung + verwaltungJahr + erhaltungJahr + wagnisJahr + sonstiges;
 
@@ -543,5 +544,8 @@
     document.querySelectorAll("input").forEach(el => el.value = "");
     calc();
   }
+</script>
 
-  document.querySelectorAll("inpu
+</body>
+</html>
+                                                                                                                                                                                                                                                                                                                                                                                                                         
