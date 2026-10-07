@@ -3,49 +3,60 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wirtschaftlichkeitsrechner für Immobilien · IFM-Schulung</title>
+<title>Wirtschaftlichkeitsrechner · ifmera academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --navy: #2A4566;
-    --red: #AD0131;
-    --yellow: #FABB17;
-    --green: #1BA56E;
-    --green-dark: #168558;
-    --light: #E1EAF5;
-    --gray: #8293A7;
-    --bg: #F5F7FB;
+    --gruen: #00444A;
+    --teal: #1F5B60;
+    --beige: #FAF5EB;
+    --lemon: #E6FF2A;
+    --orange: #FF7758;
+    --orange-dark: #F05E3D;
+    --surround: #052a2e;
     --white: #FFFFFF;
-    --text: #1F2A3B;
-    --border: #D4DCE8;
+    --line: rgba(0, 68, 74, 0.14);
+    --tint: rgba(0, 68, 74, 0.06);
+    --radius: 12px;
+    --radius-s: 8px;
   }
 
   * { box-sizing: border-box; }
 
   body {
     margin: 0;
-    font-family: "Ubuntu", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background: var(--bg);
-    color: var(--text);
+    font-family: "Roboto", "Segoe UI", system-ui, sans-serif;
+    background: var(--beige);
+    color: var(--gruen);
     line-height: 1.5;
   }
 
   header {
-    background: var(--navy);
-    color: white;
-    padding: 1.5rem 2rem;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    background: var(--gruen);
+    color: var(--beige);
+    padding: 1.2rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
   }
+
+  header img.logo { height: 38px; width: auto; display: block; }
+
+  header .titel { border-left: 1px solid rgba(250, 245, 235, 0.25); padding-left: 1.6rem; }
 
   header h1 {
     margin: 0;
-    font-size: 1.6rem;
-    font-weight: 700;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--lemon);
   }
 
   header .subtitle {
-    margin-top: 0.3rem;
-    font-size: 0.95rem;
-    opacity: 0.85;
+    margin-top: 0.15rem;
+    font-size: 0.92rem;
+    color: rgba(250, 245, 235, 0.75);
   }
 
   .container {
@@ -64,43 +75,55 @@
 
   @media (max-width: 720px) {
     .container { grid-template-columns: 1fr; padding: 1rem; }
-    header { padding: 1rem; }
-    header h1 { font-size: 1.3rem; }
+    header { padding: 1rem; flex-direction: column; align-items: flex-start; gap: 0.8rem; }
+    header .titel { border-left: none; padding-left: 0; }
+    header h1 { font-size: 1.25rem; }
   }
 
   .panel {
     background: var(--white);
-    border-radius: 10px;
+    border-radius: var(--radius);
     padding: 1.5rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    box-shadow: 0 1px 3px rgba(0, 68, 74, 0.08);
   }
 
   .panel h2 {
-    margin: 0 0 1rem 0;
-    font-size: 1.05rem;
-    color: var(--navy);
-    border-bottom: 2px solid var(--light);
-    padding-bottom: 0.5rem;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
+    margin: 0 0 1.1rem 0;
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--gruen);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
   }
 
-  .group {
-    margin-bottom: 1.2rem;
+  .panel h2::before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
+    background: var(--lemon);
+    box-shadow: inset 0 0 0 1px rgba(0, 68, 74, 0.15);
   }
 
+  .group { margin-bottom: 1.2rem; }
   .group:last-child { margin-bottom: 0; }
 
   .group-title {
-    font-size: 0.78rem;
-    font-weight: 700;
-    color: var(--gray);
+    font-size: 0.76rem;
+    font-weight: 500;
+    color: var(--teal);
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.08em;
     margin-bottom: 0.6rem;
     padding-bottom: 0.3rem;
-    border-bottom: 1px dashed var(--border);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .group.kostenmiete {
+    background: var(--tint);
+    border-radius: var(--radius-s);
+    padding: 0.8rem 0.9rem 0.2rem;
   }
 
   .field {
@@ -112,8 +135,8 @@
   }
 
   .field label {
-    font-size: 0.88rem;
-    color: var(--text);
+    font-size: 0.9rem;
+    color: var(--gruen);
     display: flex;
     flex-direction: column;
     gap: 0.1rem;
@@ -121,43 +144,40 @@
   }
 
   .field .unit {
-    font-size: 0.72rem;
-    color: var(--gray);
-    font-style: italic;
+    font-size: 0.74rem;
+    color: var(--teal);
+    opacity: 0.8;
   }
 
   .field input {
-    padding: 0.4rem 0.6rem;
-    border: 1px solid var(--border);
-    border-radius: 5px;
-    font-size: 0.9rem;
+    padding: 0.45rem 0.6rem;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    font-size: 0.95rem;
     text-align: right;
     font-family: inherit;
-    color: var(--text);
+    color: var(--gruen);
     background: var(--white);
     transition: border-color 0.15s, box-shadow 0.15s;
   }
 
   .field input:focus {
     outline: none;
-    border-color: var(--navy);
-    box-shadow: 0 0 0 2px rgba(42,69,102,0.15);
+    border-color: var(--gruen);
+    box-shadow: 0 0 0 3px rgba(230, 255, 42, 0.7);
   }
 
-  .field input::placeholder {
-    color: #C4CDDB;
-    font-style: italic;
-  }
+  .field input::placeholder { color: rgba(0, 68, 74, 0.3); }
 
   table.calc {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.88rem;
+    font-size: 0.9rem;
   }
 
   table.calc td {
     padding: 0.4rem 0.5rem;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--line);
   }
 
   table.calc td.value {
@@ -168,32 +188,43 @@
   }
 
   table.calc tr.section td {
-    background: var(--light);
-    color: var(--navy);
-    font-weight: 700;
+    background: var(--gruen);
+    color: var(--lemon);
+    font-weight: 500;
     text-transform: uppercase;
-    font-size: 0.78rem;
-    letter-spacing: 0.05em;
+    font-size: 0.76rem;
+    letter-spacing: 0.08em;
     padding: 0.5rem;
+    border-bottom: none;
+  }
+
+  table.calc tr.section:not(:first-child) td { border-top: 1rem solid var(--white); }
+
+  table.calc tr.kalk td:first-child::after {
+    content: "kalkulatorisch";
+    margin-left: 0.5rem;
+    font-size: 0.68rem;
+    color: var(--orange-dark);
+    border: 1px solid var(--orange);
+    border-radius: 4px;
+    padding: 0 0.3rem;
+    vertical-align: 1px;
   }
 
   table.calc tr.sum td {
-    border-top: 2px solid var(--navy);
+    border-top: 2px solid var(--gruen);
     font-weight: 700;
-    color: var(--navy);
   }
 
-  table.calc tr.highlight td.value {
-    color: var(--navy);
+  table.calc tr.highlight td {
+    background: var(--tint);
     font-weight: 700;
-    font-size: 0.95rem;
   }
 
   .kennzahlen {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 0.8rem;
-    margin-top: 1rem;
   }
 
   @media (max-width: 720px) {
@@ -201,27 +232,77 @@
   }
 
   .kennzahl {
-    background: var(--light);
-    border-radius: 8px;
-    padding: 1rem;
+    background: var(--gruen);
+    color: var(--beige);
+    border-radius: var(--radius);
+    padding: 1rem 0.6rem;
     text-align: center;
   }
 
   .kennzahl .label {
-    font-size: 0.75rem;
-    font-weight: 700;
+    font-size: 0.72rem;
+    font-weight: 500;
     text-transform: uppercase;
-    color: var(--gray);
-    letter-spacing: 0.06em;
+    color: rgba(250, 245, 235, 0.7);
+    letter-spacing: 0.08em;
     margin-bottom: 0.3rem;
   }
 
   .kennzahl .wert {
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--navy);
+    font-size: 1.55rem;
+    font-weight: 500;
+    color: var(--lemon);
     font-variant-numeric: tabular-nums;
   }
+
+  .km-vergleich {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .km-vergleich .kennzahl .wert { font-size: 1.9rem; }
+  .km-vergleich .kennzahl.ist { background: var(--white); color: var(--gruen); box-shadow: inset 0 0 0 2px var(--gruen); }
+  .km-vergleich .kennzahl.ist .label { color: var(--teal); }
+  .km-vergleich .kennzahl.ist .wert { color: var(--gruen); }
+
+  .urteil {
+    border-radius: var(--radius-s);
+    padding: 0.7rem 0.9rem;
+    font-size: 0.92rem;
+    font-weight: 500;
+    background: var(--tint);
+    color: var(--teal);
+    margin-bottom: 1.4rem;
+  }
+
+  .urteil.neg { background: rgba(255, 119, 88, 0.14); color: #A8341A; border-left: 4px solid var(--orange); }
+  .urteil.pos { background: rgba(230, 255, 42, 0.35); color: var(--gruen); border-left: 4px solid var(--gruen); }
+
+  .sublabel {
+    font-size: 0.76rem;
+    font-weight: 500;
+    color: var(--teal);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 0.6rem;
+  }
+
+  .erklaerung { margin-top: 1.4rem; font-size: 0.86rem; line-height: 1.6; }
+  .erklaerung p { margin: 0 0 0.6rem; }
+
+  .hinweis {
+    margin-top: 1.2rem;
+    padding: 0.8rem 0.9rem;
+    background: var(--gruen);
+    color: var(--beige);
+    border-radius: var(--radius-s);
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  .hinweis strong { color: var(--lemon); }
 
   .actions {
     margin-top: 1.2rem;
@@ -239,68 +320,74 @@
   button {
     border: none;
     padding: 0.6rem 1.2rem;
-    border-radius: 5px;
+    border-radius: var(--radius-s);
     font-family: inherit;
-    font-size: 0.85rem;
+    font-size: 0.88rem;
     font-weight: 500;
     cursor: pointer;
     transition: background 0.15s;
   }
 
   button.primary {
-    background: var(--green);
-    color: white;
-    font-size: 1rem;
-    font-weight: 700;
+    background: var(--orange);
+    color: var(--white);
+    font-size: 1.02rem;
     padding: 0.9rem 1.2rem;
     width: 100%;
   }
 
-  button.primary:hover { background: var(--green-dark); }
+  button.primary:hover { background: var(--orange-dark); }
 
   button.secondary {
     background: var(--white);
-    color: var(--navy);
-    border: 1px solid var(--navy);
+    color: var(--gruen);
+    border: 1px solid var(--gruen);
   }
 
-  button.secondary:hover { background: var(--light); }
+  button.secondary:hover { background: var(--tint); }
 
   button.tertiary {
-    background: var(--navy);
-    color: white;
+    background: var(--gruen);
+    color: var(--beige);
   }
 
-  button.tertiary:hover { background: #1d3148; }
+  button.tertiary:hover { background: var(--teal); }
 
   footer {
     max-width: 1600px;
-    margin: 1rem auto 2rem;
+    margin: 0 auto 2rem;
     padding: 0 2rem;
     font-size: 0.78rem;
-    color: var(--gray);
+    color: var(--teal);
     line-height: 1.55;
   }
 
   footer p { margin: 0.3rem 0; }
+  footer strong { color: var(--gruen); font-weight: 500; }
 
-  footer strong { color: var(--text); }
-
-  /* Print Styles */
   @media print {
-    header { background: white !important; color: var(--navy) !important; box-shadow: none; border-bottom: 2px solid var(--navy); }
+    body { background: white; }
+    header { background: white !important; color: var(--gruen) !important; border-bottom: 2px solid var(--gruen); }
+    header img.logo { display: none; }
+    header h1 { color: var(--gruen); }
+    header .subtitle { color: var(--teal); }
+    header .titel { border-left: none; padding-left: 0; }
     .container { display: block; padding: 1rem; }
-    .panel { box-shadow: none; border: 1px solid var(--border); page-break-inside: avoid; margin-bottom: 1rem; }
+    .panel { box-shadow: none; border: 1px solid var(--line); page-break-inside: avoid; margin-bottom: 1rem; }
     .actions { display: none; }
     input { border: none; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>Wirtschaftlichkeitsrechner für Immobilien</h1>
-  <div class="subtitle">IFM-Schulung „Haus- und Grundstücksverwaltung" · Trainer: Herr Krnic</div>
+  <img class="logo" src="ifmera-logo.png" alt="ifmera academy">
+  <div class="titel">
+    <h1>Wirtschaftlichkeitsrechner für Immobilien</h1>
+    <div class="subtitle">Haus- und Grundstücksverwaltung · Trainer: Herr Krnic</div>
+  </div>
 </header>
 
 <div class="container">
@@ -385,6 +472,22 @@
       </div>
     </div>
 
+    <div class="group kostenmiete">
+      <div class="group-title">Kostenmiete nach II. BV</div>
+      <div class="field">
+        <label>Wohnfläche <span class="unit">m²</span></label>
+        <input type="number" id="wohnflaeche" placeholder="0" min="0" step="10">
+      </div>
+      <div class="field">
+        <label>Eigenkapitalverzinsung <span class="unit">% p. a., kalkulatorisch</span></label>
+        <input type="number" id="ek_zins_proz" placeholder="0" min="0" step="0.5">
+      </div>
+      <div class="field">
+        <label>Betriebskosten <span class="unit">Euro pro Jahr, nur für die Kostenmiete</span></label>
+        <input type="number" id="betriebskosten" placeholder="0" min="0" step="100">
+      </div>
+    </div>
+
     <div class="actions">
       <button class="primary" type="button" onclick="calc()">Berechnen</button>
       <div class="actions-row">
@@ -416,12 +519,25 @@
       <tr><td>Cashflow vor Steuern</td><td class="value" id="o_cf_vor">0 €</td></tr>
       <tr><td>Abschreibung (steuerlich)</td><td class="value" id="o_afa">0 €</td></tr>
       <tr><td>Steuerersparnis</td><td class="value" id="o_steuer">0 €</td></tr>
-      <tr class="highlight"><td><strong>Cashflow nach Steuern</strong></td><td class="value" id="o_cf_nach">0 €</td></tr>
+      <tr class="highlight"><td>Cashflow nach Steuern</td><td class="value" id="o_cf_nach">0 €</td></tr>
 
       <tr class="section"><td colspan="2">Finanzierung</td></tr>
       <tr><td>Gesamtkosten Erwerb</td><td class="value" id="o_gesamt">0 €</td></tr>
       <tr><td>Fremdkapital</td><td class="value" id="o_fk">0 €</td></tr>
       <tr><td>Gebäudewert (Bemessung AfA)</td><td class="value" id="o_gebw">0 €</td></tr>
+
+      <tr class="section"><td colspan="2">Kostenmiete (II. BV, ohne Tilgung)</td></tr>
+      <tr><td>Fremdkapitalzinsen</td><td class="value" id="o_km_zinsen">0 €</td></tr>
+      <tr class="kalk"><td>Eigenkapitalverzinsung</td><td class="value" id="o_km_ekz">0 €</td></tr>
+      <tr class="sum"><td>Kapitalkosten</td><td class="value" id="o_km_kapital">0 €</td></tr>
+      <tr class="kalk"><td>Abschreibung</td><td class="value" id="o_km_afa">0 €</td></tr>
+      <tr><td>Verwaltungskosten</td><td class="value" id="o_km_verwaltung">0 €</td></tr>
+      <tr><td>Betriebskosten</td><td class="value" id="o_km_bk">0 €</td></tr>
+      <tr><td>Instandhaltung</td><td class="value" id="o_km_erhaltung">0 €</td></tr>
+      <tr class="kalk"><td>Mietausfallwagnis</td><td class="value" id="o_km_wagnis">0 €</td></tr>
+      <tr><td>Versicherungen und Sonstiges</td><td class="value" id="o_km_sonstiges">0 €</td></tr>
+      <tr class="sum"><td>Bewirtschaftungskosten</td><td class="value" id="o_km_bewirt">0 €</td></tr>
+      <tr class="highlight"><td>Laufende Aufwendungen</td><td class="value" id="o_km_laufend">0 €</td></tr>
     </table>
   </div>
 
@@ -429,6 +545,22 @@
   <div class="panel panel-results">
     <h2>Kennzahlen</h2>
 
+    <p class="sublabel">Trägt sich das Haus?</p>
+    <div class="km-vergleich">
+      <div class="kennzahl">
+        <div class="label">Kostenmiete</div>
+        <div class="wert" id="k_kostenmiete">0,00 €</div>
+        <div class="label" style="margin:0.2rem 0 0">je m² und Monat</div>
+      </div>
+      <div class="kennzahl ist">
+        <div class="label">Ist-Miete</div>
+        <div class="wert" id="k_istmiete">0,00 €</div>
+        <div class="label" style="margin:0.2rem 0 0">je m² und Monat</div>
+      </div>
+    </div>
+    <div class="urteil" id="k_urteil">Wohnfläche eingeben, dann berechnen.</div>
+
+    <p class="sublabel">Renditen</p>
     <div class="kennzahlen">
       <div class="kennzahl">
         <div class="label">Bruttomietrendite</div>
@@ -444,21 +576,22 @@
       </div>
     </div>
 
-    <div style="margin-top: 1.5rem; font-size: 0.85rem; line-height: 1.6;">
+    <div class="erklaerung">
+      <p><strong>Kostenmiete:</strong> Laufende Aufwendungen geteilt durch Wohnfläche und zwölf Monate. Die Miete, die das Haus mindestens bringen muss, damit es sich trägt. Die Tilgung gehört nicht hinein, sie ist Vermögensbildung.</p>
       <p><strong>Bruttomietrendite:</strong> Jahresnettokaltmiete geteilt durch Kaufpreis. Grobe Vergleichskennzahl ohne Bewirtschaftungs- und Kapitalkosten.</p>
       <p><strong>Nettomietrendite:</strong> Cashflow vor Steuern geteilt durch Gesamtkosten (Kaufpreis plus Nebenkosten). Aussagekräftigster Maßstab für die Wirtschaftlichkeit des Objekts.</p>
       <p><strong>Eigenkapitalrendite:</strong> Cashflow nach Steuern geteilt durch Eigenkapital. Zeigt die Verzinsung des tatsächlich eingesetzten Kapitals (Leverage-Effekt).</p>
     </div>
 
-    <div style="margin-top: 1.2rem; padding: 0.8rem; background: #FFF8E1; border-left: 4px solid var(--yellow); border-radius: 4px; font-size: 0.82rem; line-height: 1.5;">
-      <strong>Hinweis:</strong> Dieser Rechner ist ein Lern- und Schulungstool. Die steuerliche Wirkung wird vereinfacht dargestellt (Abschreibung minus Tilgung). Für eine belastbare Investitionsentscheidung ist eine individuelle steuerliche Beratung erforderlich.
+    <div class="hinweis">
+      <strong>Hinweis:</strong> Dieser Rechner ist ein Lern- und Schulungstool. Die steuerliche Wirkung wird vereinfacht dargestellt (Abschreibung mal Steuersatz). Für eine belastbare Investitionsentscheidung ist eine individuelle steuerliche Beratung erforderlich.
     </div>
   </div>
 
 </div>
 
 <footer>
-  <p><strong>Wirtschaftlichkeitsrechner für Immobilien</strong> · Erstellt für die IFM-Schulung „Haus- und Grundstücksverwaltung".</p>
+  <p><strong>Wirtschaftlichkeitsrechner für Immobilien</strong> · © ifmera academy GmbH | Herr Krnic</p>
   <p>Reine Lern- und Schulungssoftware. Keine Steuer- oder Anlageberatung. Alle Werte ohne Gewähr.</p>
 </footer>
 
@@ -466,6 +599,11 @@
   const fmtEur = (v) => {
     if (!isFinite(v)) return "0 €";
     return new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(v);
+  };
+
+  const fmtEurCent = (v) => {
+    if (!isFinite(v)) return "0,00 €";
+    return new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR", minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(v);
   };
 
   const fmtProz = (v) => {
@@ -479,6 +617,8 @@
     const v = parseFloat(el.value.replace(",", "."));
     return isNaN(v) ? 0 : v;
   };
+
+  const out = (id, text) => { document.getElementById(id).textContent = text; };
 
   function calc() {
     const kaufpreis = val("kaufpreis");
@@ -495,6 +635,9 @@
     const sonstiges = val("sonstiges");
     const afaProz = val("afa_proz");
     const steuersatz = val("steuersatz");
+    const wohnflaeche = val("wohnflaeche");
+    const ekZinsProz = val("ek_zins_proz");
+    const betriebskosten = val("betriebskosten");
 
     const summeErtraege = jahresMiete + jahresStp;
 
@@ -517,35 +660,78 @@
     const nettoR = gesamtkosten > 0 ? cfVor / gesamtkosten * 100 : NaN;
     const ekR = eigenkapital > 0 ? cfNach / eigenkapital * 100 : NaN;
 
-    document.getElementById("o_miete").textContent = fmtEur(jahresMiete);
-    document.getElementById("o_stp").textContent = fmtEur(jahresStp);
-    document.getElementById("o_ertraege").textContent = fmtEur(summeErtraege);
-    document.getElementById("o_zinsen").textContent = fmtEur(zinsen);
-    document.getElementById("o_tilgung").textContent = fmtEur(tilgung);
-    document.getElementById("o_verwaltung").textContent = fmtEur(verwaltungJahr);
-    document.getElementById("o_erhaltung").textContent = fmtEur(erhaltungJahr);
-    document.getElementById("o_wagnis").textContent = fmtEur(wagnisJahr);
-    document.getElementById("o_sonstiges").textContent = fmtEur(sonstiges);
-    document.getElementById("o_aufwand").textContent = fmtEur(summeAufwand);
-    document.getElementById("o_cf_vor").textContent = fmtEur(cfVor);
-    document.getElementById("o_afa").textContent = fmtEur(afa);
-    document.getElementById("o_steuer").textContent = fmtEur(steuerersparnis);
-    document.getElementById("o_cf_nach").textContent = fmtEur(cfNach);
-    document.getElementById("o_gesamt").textContent = fmtEur(gesamtkosten);
-    document.getElementById("o_fk").textContent = fmtEur(fremdkapital);
-    document.getElementById("o_gebw").textContent = fmtEur(gebaeudewert);
+    // Kostenmiete nach II. BV: Kapitalkosten plus Bewirtschaftungskosten, ohne Tilgung
+    const ekZinsen = eigenkapital * ekZinsProz / 100;
+    const kapitalkosten = zinsen + ekZinsen;
+    const bewirtschaftung = afa + verwaltungJahr + betriebskosten + erhaltungJahr + wagnisJahr + sonstiges;
+    const laufend = kapitalkosten + bewirtschaftung;
+    const kostenmiete = wohnflaeche > 0 ? laufend / wohnflaeche / 12 : NaN;
+    const istmiete = wohnflaeche > 0 ? jahresMiete / wohnflaeche / 12 : NaN;
 
-    document.getElementById("k_brutto").textContent = fmtProz(bruttoR);
-    document.getElementById("k_netto").textContent = fmtProz(nettoR);
-    document.getElementById("k_ek").textContent = fmtProz(ekR);
+    out("o_miete", fmtEur(jahresMiete));
+    out("o_stp", fmtEur(jahresStp));
+    out("o_ertraege", fmtEur(summeErtraege));
+    out("o_zinsen", fmtEur(zinsen));
+    out("o_tilgung", fmtEur(tilgung));
+    out("o_verwaltung", fmtEur(verwaltungJahr));
+    out("o_erhaltung", fmtEur(erhaltungJahr));
+    out("o_wagnis", fmtEur(wagnisJahr));
+    out("o_sonstiges", fmtEur(sonstiges));
+    out("o_aufwand", fmtEur(summeAufwand));
+    out("o_cf_vor", fmtEur(cfVor));
+    out("o_afa", fmtEur(afa));
+    out("o_steuer", fmtEur(steuerersparnis));
+    out("o_cf_nach", fmtEur(cfNach));
+    out("o_gesamt", fmtEur(gesamtkosten));
+    out("o_fk", fmtEur(fremdkapital));
+    out("o_gebw", fmtEur(gebaeudewert));
+
+    out("o_km_zinsen", fmtEur(zinsen));
+    out("o_km_ekz", fmtEur(ekZinsen));
+    out("o_km_kapital", fmtEur(kapitalkosten));
+    out("o_km_afa", fmtEur(afa));
+    out("o_km_verwaltung", fmtEur(verwaltungJahr));
+    out("o_km_bk", fmtEur(betriebskosten));
+    out("o_km_erhaltung", fmtEur(erhaltungJahr));
+    out("o_km_wagnis", fmtEur(wagnisJahr));
+    out("o_km_sonstiges", fmtEur(sonstiges));
+    out("o_km_bewirt", fmtEur(bewirtschaftung));
+    out("o_km_laufend", fmtEur(laufend));
+
+    out("k_brutto", fmtProz(bruttoR));
+    out("k_netto", fmtProz(nettoR));
+    out("k_ek", fmtProz(ekR));
+    out("k_kostenmiete", fmtEurCent(kostenmiete));
+    out("k_istmiete", fmtEurCent(istmiete));
+
+    const urteil = document.getElementById("k_urteil");
+    urteil.className = "urteil";
+    if (!(wohnflaeche > 0)) {
+      urteil.textContent = "Wohnfläche eingeben, dann berechnen.";
+    } else if (!(jahresMiete > 0)) {
+      urteil.textContent = "Nettokaltmiete eingeben, um mit der Kostenmiete zu vergleichen.";
+    } else {
+      // aus den angezeigten, auf Cent gerundeten Werten, damit die Lücke zum Bildschirm passt
+      const diff = (Math.round(istmiete * 100) - Math.round(kostenmiete * 100)) / 100;
+      if (diff < 0) {
+        urteil.classList.add("neg");
+        urteil.textContent = "Das Haus trägt sich nicht: Es fehlen " + fmtEurCent(-diff) + " je m² und Monat.";
+      } else {
+        urteil.classList.add("pos");
+        urteil.textContent = "Das Haus trägt sich: " + fmtEurCent(diff) + " je m² und Monat über der Kostenmiete.";
+      }
+    }
   }
 
   function clearAll() {
     document.querySelectorAll("input").forEach(el => el.value = "");
     calc();
   }
+
+  document.querySelectorAll("input").forEach(el => {
+    el.addEventListener("keydown", (e) => { if (e.key === "Enter") calc(); });
+  });
 </script>
 
 </body>
 </html>
-                                                                                                                                                                                                                                                                                                                                                                                                                         

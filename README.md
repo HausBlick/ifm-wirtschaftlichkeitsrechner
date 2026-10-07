@@ -1,6 +1,6 @@
 # Wirtschaftlichkeitsrechner für Immobilien
 
-Lern- und Schulungstool für die Berechnung der Wirtschaftlichkeit einer Wohnimmobilie als Kapitalanlage. Entwickelt für die IFM-Schulung „Haus- und Grundstücksverwaltung" von Trainer Herr Krnic.
+Lern- und Schulungstool für die Berechnung der Wirtschaftlichkeit einer Wohnimmobilie als Kapitalanlage. Entwickelt für die ifmera-Schulung „Haus- und Grundstücksverwaltung" von Trainer Herr Krnic.
 
 ## Funktionen
 
@@ -9,6 +9,7 @@ Der Rechner ermittelt aus einfachen Eingaben:
 - Erträge (Nettokaltmiete, Stellplatzmieten)
 - Aufwendungen (Zins, Tilgung, Verwaltung, Erhaltungsrückstellung, Mietausfallwagnis, Versicherungen)
 - Cashflow vor und nach Steuern
+- Kostenmiete nach II. BV je m² und Monat, im Vergleich zur Ist-Miete
 - Bruttomietrendite, Nettomietrendite und Eigenkapitalrendite
 
 Alle Ergebnisse werden live während der Eingabe berechnet.
